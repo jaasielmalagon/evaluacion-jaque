@@ -1,0 +1,77 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Usuarios</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="example-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource">
+
+          <!-- Id Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="first_name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.first_name}} </mat-cell>
+          </ng-container>
+
+          <!-- Last name Column -->
+          <ng-container matColumnDef="last_name">
+            <mat-header-cell *matHeaderCellDef> Last name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.last_name}} </mat-cell>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+          </ng-container>
+
+          <!-- Gender Column -->
+          <ng-container matColumnDef="gender">
+            <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
+          </ng-container>
+
+          <!-- Image Column -->
+          <ng-container matColumnDef="image">
+            <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <!-- <img src="" class="md-user-avatar" /> -->
+              <img [src]="sanitizer(element.image)" alt="imagen">
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+          [showFirstLastButtons]="true">
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-divider></mat-divider>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Gráfica de ventas</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flex">
+        <div class="flex-item">
+          <div style="display: block;">
+            <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
+              [options]="lineChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
